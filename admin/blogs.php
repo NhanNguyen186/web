@@ -25,7 +25,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         }else{
             $alt_image=$_POST['old_alt_image'];
         }
-
         //Params
         $new_blog->n_blog_post_id = $_POST['blog_id'];
         $new_blog->n_category_id = $_POST['select_category'];
@@ -37,7 +36,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $new_blog->v_main_image_url = $main_image;
         $new_blog->v_alt_image_url = $alt_image;
         $new_blog->n_blog_post_views = $_POST['post_view'];
+        if(!in_array("opt_place",$_POST)){
+        $new_blog->n_home_page_place = 0;            
+        }else{
         $new_blog->n_home_page_place = $_POST['opt_place'];
+        }
+
         $new_blog->f_post_status = $_POST['status'];
         $new_blog->d_date_created = $_POST['date_created'];
         $new_blog->d_time_created = $_POST['time_created'];
@@ -48,6 +52,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $flag="Update Successfully!";
         }
     }
+
+}
+if($_SERVER['REQUEST_METHOD']=='POST'){
     if(isset($_POST['delete'])){
         $new_tag = new tag($db);
         $new_tag->n_blog_post_id = $_POST['blog_id'];
