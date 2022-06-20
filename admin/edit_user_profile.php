@@ -23,7 +23,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $new_user->v_fullname = $_POST['name'];
         $new_user->v_email = $_POST['email'];
         $new_user->v_username = $_POST['username'];
-        $new_user->v_password = md5($_POST['password']);
+        if($_POST['password'] != $_POST['old_password']){
+            $new_user->v_password = md5($_POST['password']);
+        }
+        else{
+            $new_user->v_password = $_POST['old_password'];
+        }
         $new_user->v_phone = $_POST['phone'];
         $new_user->v_image = $image_name;
         $new_user->v_message = $_POST['about'];
@@ -131,6 +136,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             value="<?php echo $row_user['v_password'] ?>"
                                             class="form-control" placeholder="Enter password">
                                         </div>
+                                        <div class="form-group">
+                                             <input type="hidden" name="old_password" 
+                                            value="<?php echo $row_user['v_password'] ?>"
+                                            class="form-control" >
+                                        </div>
                                        
                                         <div class="form-group">
                                             <label>Phone Number</label>
@@ -167,12 +177,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             <?php if(empty($row_user['v_image']))
                                             {
                                                 ?>
-                                            <img class="img-thumbnail" src="../images/avatars/hau.jpg" alt="Hau" width="180px">
+                                            <img class="img-thumbnail" src="../images/avatars/pog.jpg" alt="Nhan" width="180px">
                                         <?php }
                                         else
                                         {
                                          ?>
-                                        <img class="img-thumbnail" src="<?php echo "../images/avatars/".$row_user['v_image'] ?>" alt="Hau" width="180px">
+                                        <img class="img-thumbnail" src="<?php echo "../images/avatars/".$row_user['v_image'] ?>" alt="Nhan" width="180px">
                                         <?php 
                                         } ?>
                                         </div>
