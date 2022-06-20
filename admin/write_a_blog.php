@@ -138,7 +138,7 @@ if(isset($_POST['write_blog'])){
                                                 <?php  
                                                 while($rs = $result->fetch()){
                                                 ?>
-                                                <option value="<?php echo $rs['n_blog_post_id'] ?>" >
+                                                <option value="<?php echo $rs['n_category_id'] ?>" >
                                                     <?php echo $rs['v_category_title'] ?>
                                                 </option>
                                                 <?php } ?>
